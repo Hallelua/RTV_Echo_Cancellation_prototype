@@ -23,13 +23,13 @@ const AudioProcessor: React.FC<AudioProcessorProps> = ({
       try {
         onStatusChange('processing');
         // First check if model files exist
-        const modelResponse = await fetch('/model.json');
+        const modelResponse = await fetch('public/tfjs_model/model.json');
         if (!modelResponse.ok) {
           throw new Error('Model files not found. Please ensure the model is properly converted and placed in the public directory.');
         }
 
         // Load the model
-        modelRef.current = await tf.loadLayersModel('/model.json');
+        modelRef.current = await tf.loadLayersModel('public/tfjs_model/model.json');
         setModelLoaded(true);
         onStatusChange('idle');
       } catch (error) {
